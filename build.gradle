@@ -2,6 +2,14 @@ plugins {
   id 'java'
   id 'application'
   id 'checkstyle'
+  id 'com.github.spotbugs' version '2.0.0'
+}
+
+spotbugs {
+  toolVersion = '4.0.0-beta1'
+  effort = 'max'
+  reportLevel = 'low'
+  ignoreFailures = true
 }
 
 repositories {
@@ -14,3 +22,20 @@ dependencies {
 }
 
 mainClassName = 'com.github.seikichi.pronto_checkstyle_findbugs_example.App'
+
+// see: https://github.com/gradle/gradle/issues/2138
+spotbugsMain {
+  extraArgs = ['-sourcepath', 'src/main/java']
+}
+
+spotbugsTest {
+  extraArgs = ['-sourcepath', 'src/test/java']
+}
+
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+  source = fileTree("src/NOTEXISTS")
+  reports {
+    xml.enabled = true
+    xml.withMessages = true
+  }
+}
