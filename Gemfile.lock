@@ -32,7 +32,7 @@ GEM
     public_suffix (3.0.3)
     rainbow (2.2.2)
       rake
-    rake (12.3.2)
+    rake (13.0.1)
     rugged (0.28.1)
     sawyer (0.8.2)
       addressable (>= 2.3.5)
